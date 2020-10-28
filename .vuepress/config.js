@@ -1,6 +1,5 @@
 module.exports = {
-    //port: '8080',
-    // base: "/docs/",
+    base: "/docs/",
     markdown: {
         lineNumbers: true
     },
@@ -13,7 +12,6 @@ module.exports = {
 
         nav: [
             { text: 'Home', link: '/' },
-            { text: 'notes', link: '/notes/' },
             { text: 'Support', link: 'https://vuepress.vuejs.org/zh/' },
             {
                 text: "Language",
