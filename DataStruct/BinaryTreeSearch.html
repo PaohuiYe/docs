@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>二叉树的遍历</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    
+    <meta name="description" content="">
+    
+    <link rel="preload" href="/docs/assets/css/0.styles.5037e10c.css" as="style"><link rel="preload" href="/docs/assets/js/app.01c57ae1.js" as="script"><link rel="preload" href="/docs/assets/js/2.6ead0304.js" as="script"><link rel="preload" href="/docs/assets/js/13.852a65b6.js" as="script"><link rel="prefetch" href="/docs/assets/js/10.da0c92a5.js"><link rel="prefetch" href="/docs/assets/js/11.78ba5273.js"><link rel="prefetch" href="/docs/assets/js/12.b0234b2e.js"><link rel="prefetch" href="/docs/assets/js/14.d65ae1a0.js"><link rel="prefetch" href="/docs/assets/js/15.9f39cd23.js"><link rel="prefetch" href="/docs/assets/js/16.d20db39b.js"><link rel="prefetch" href="/docs/assets/js/3.4617ac6d.js"><link rel="prefetch" href="/docs/assets/js/4.5cc5de6c.js"><link rel="prefetch" href="/docs/assets/js/5.c0a17e28.js"><link rel="prefetch" href="/docs/assets/js/6.00b48d75.js"><link rel="prefetch" href="/docs/assets/js/7.bfe91f85.js"><link rel="prefetch" href="/docs/assets/js/8.cfd2dada.js"><link rel="prefetch" href="/docs/assets/js/9.2764f422.js">
+    <link rel="stylesheet" href="/docs/assets/css/0.styles.5037e10c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/docs/" class="home-link router-link-active"><img src="/docs/img/head.jpg" alt="" class="logo"> <!----></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/docs/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="https://vuepress.vuejs.org/zh/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Support
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Language" class="dropdown-title"><span class="title">Language</span> <span class="arrow down"></span></button> <button type="button" aria-label="Language" class="mobile-dropdown-title"><span class="title">Language</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/docs/language/chinese/" class="nav-link">
+  Chinese
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/docs/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="https://vuepress.vuejs.org/zh/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Support
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Language" class="dropdown-title"><span class="title">Language</span> <span class="arrow down"></span></button> <button type="button" aria-label="Language" class="mobile-dropdown-title"><span class="title">Language</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/docs/language/chinese/" class="nav-link">
+  Chinese
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><a href="/docs/Algorithm/" class="sidebar-heading clickable"><span>Algorithm</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/Algorithm/1~20.html" class="sidebar-link">剑指Offer-1~20</a></li><li><a href="/docs/Algorithm/21~40.html" class="sidebar-link">剑指Offer-21~40</a></li><li><a href="/docs/Algorithm/41~60.html" class="sidebar-link">剑指Offer-41~60</a></li><li><a href="/docs/Algorithm/61~67.html" class="sidebar-link">剑指Offer-61~67</a></li><li><a href="/docs/Algorithm/Sort.html" class="sidebar-link">排序</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/docs/DataStruct/" class="sidebar-heading clickable router-link-active open"><span>DataStruct</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/DataStruct/BinaryTreeSearch.html" aria-current="page" class="active sidebar-link">单链表插入删除</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/docs/DataStruct/SingleList.html" class="sidebar-link">单链表插入删除</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="二叉树的遍历"><a href="#二叉树的遍历" class="header-anchor">#</a> 二叉树的遍历</h1> <ul><li>将数组形式（BFS顺序）二叉树转为链形式；</li> <li>三种DFS的递归、迭代是实现；</li> <li>BFS迭代实现；</li></ul> <h3 id="class-binarytree"><a href="#class-binarytree" class="header-anchor">#</a> class BinaryTree</h3> <div class="language-c++ line-numbers-mode"><pre class="language-text"><code>template&lt;typename T&gt;
+class BinaryTree {
+private:
+	struct TreeNode {
+		T val;
+		struct TreeNode *left;
+		struct TreeNode *right;
+		TreeNode(T x) :
+			val(x), left(nullptr), right(nullptr) {
+		}
+	};
+	TreeNode *root_;
+	TreeNode * buildTree(vector&lt;int&gt; &amp;data, int rootLoc) {
+		if (rootLoc &gt;= data.size()) return nullptr;
+		if (data.at(rootLoc) == -1) return nullptr;//空位
+		TreeNode *root = new TreeNode(data.at(rootLoc));
+		root-&gt;left = buildTree(data, 2 * rootLoc + 1);
+		root-&gt;right = buildTree(data, 2 * rootLoc + 2);
+		return root;
+	}
+	TreeNode* Deserialize(char *str) {// &quot;0,1,2,3,#,#,4,#,5,#,6,&quot;;
+		string s(str);
+		int pre = 0;
+		vector&lt;int&gt; v;
+		for (int i = 0; i &lt; s.size(); i++) {
+			if (s.at(i) == ',') {
+				int val = atoi(s.substr(pre, i - pre).c_str());//i-pre+1-1
+				v.push_back(val);
+				pre = i + 1;
+			}
+			else if (s.at(i) == '#') {
+				v.push_back(-1);//-1代表#
+				pre += 2;
+				i++;
+			}
+		}		
+		for (int i = 0; i &lt; v.size(); i++) 
+			if (v.at(i) == -1 &amp;&amp; 2 * i + 1 &lt; v.size()) 
+				v.insert(v.begin() + 2 * i + 1, 2, -1);									
+		return buildTree(v, 0);
+	}
+public:
+	/*用数组构建树 空位用-1表示*/
+	BinaryTree() {
+		root_ = nullptr;
+	}
+	BinaryTree(string data) {
+		root_ = Deserialize((char*)data.c_str());
+	}
+    TreeNode* get(){
+        return root_;
+    }
+	/*先序遍历 迭代*/
+	void preOrderDFS1() {
+		if (!root_) return;
+		stack&lt;TreeNode *&gt; s;
+		s.push(root_);
+		while (!s.empty()) {
+			TreeNode *curr = s.top();
+			s.pop();
+			cout &lt;&lt; curr-&gt;val;
+			if (curr-&gt;right) s.push(curr-&gt;right);
+			if (curr-&gt;left) s.push(curr-&gt;left);
+		}
+	}
+	/*先序遍历 递归*/
+	void preOrderDFS2() {
+		preOrderDFS2(root_);
+	}
+	void preOrderDFS2(TreeNode* root) {
+		if (root) {
+			cout &lt;&lt; root-&gt;val;
+			preOrderDFS2(root-&gt;left);
+			preOrderDFS2(root-&gt;right);
+		}
+	}
+	/*中序遍历 迭代*/
+	/*
+	第一次到根节点不访问，只有回溯（从左子树回到根节点）才访问。
+	设置一个标志位记录当前是否是回溯。
+	*/
+	void inOrderDFS1() {
+		if (!root_) return;
+		stack&lt;TreeNode *&gt; s;
+		//中序遍历根节点
+		s.push(root_);//line：1
+		bool isTraceBack = false;//line：2
+		while (!s.empty()) {
+			TreeNode *curr = s.top();
+			//1、有左节点 且 不是回溯 中序遍历左子树
+			if (curr-&gt;left &amp;&amp; !isTraceBack) s.push(curr-&gt;left);
+			else {//无左节点 或 是回溯到当前节点的
+				//2、输出当前节点并在栈中删除该节点
+				cout &lt;&lt; curr-&gt;val;
+				s.pop();
+				//3、如果存在右节点，中序遍历右子树
+				if (curr-&gt;right) {
+					s.push(curr-&gt;right);//对应line：1
+					isTraceBack = false;//对应line：2
+				}
+				else isTraceBack = true;//4、回溯 
+			}
+		}
+	}
+	/*中序遍历 递归*/
+	void inOrderDFS2() {
+		inOrderDFS2(root_);
+	}
+	void inOrderDFS2(TreeNode* root) {
+		if (root) {
+			inOrderDFS2(root-&gt;left);
+			cout &lt;&lt; root-&gt;val;
+			inOrderDFS2(root-&gt;right);
+		}
+	}
+	/*后续遍历 迭代*/
+	/*
+	根节点只有第二次出现在栈顶时，才能访问。
+	设置一个变量标识该结点是否是第一次出现在栈顶。
+	*/
+	void postOrderDFS1() {
+		if (!root_) return;
+		typedef pair&lt;TreeNode *, bool&gt; mpair;
+		stack&lt;mpair&gt; s;
+		s.push(mpair(root_, true));
+		while (!s.empty()) {
+			mpair curr = s.top();
+			s.pop();
+			if (curr.second) {//是第一次在栈顶被读取
+				curr.second = false;
+				/*交换line1 line2 line3的位置分别是三种顺序的遍历*/
+				s.push(curr);//line1
+				if (curr.first-&gt;right) s.push(mpair(curr.first-&gt;right, true));//line2
+				if (curr.first-&gt;left) s.push(mpair(curr.first-&gt;left, true));//line3
+			}
+			else {//不是第一次在栈顶被读取				
+				cout &lt;&lt; curr.first-&gt;val;
+			}
+		}
+	}
+	/*后续遍历 递归*/
+	void postOrderDFS2() {
+		postOrderDFS2(root_);
+	}
+	void postOrderDFS2(TreeNode* root) {
+		if (root) {
+			postOrderDFS2(root-&gt;left);			
+			postOrderDFS2(root-&gt;right);
+			cout &lt;&lt; root-&gt;val;
+		}
+	}
+	/*广度优先搜索*/
+	void BFS() {
+		if (!root_) return;
+		queue&lt;TreeNode *&gt; q;
+		q.push(root_);
+		while (!q.empty()) {
+			TreeNode *curr = q.front();
+			q.pop();
+			cout &lt;&lt; curr-&gt;val;
+			if (curr-&gt;left) q.push(curr-&gt;left);
+			if (curr-&gt;right) q.push(curr-&gt;right);
+		}
+	}
+    /*打印二叉树*/
+    int sum(vector&lt;int&gt; &amp;v) {
+		int sum = 0;
+		for (auto x : v) sum += x;
+		return sum;
+	}
+
+	void toString(TreeNode* pRoot)
+	{
+		if (!pRoot) return;		
+		queue&lt;TreeNode*&gt; q;
+		q.push(pRoot);
+		vector&lt;int&gt; cnt1;//当前层每个节点的子节点数
+		vector&lt;int&gt; cnt2;//下一层每个节点的子节点数
+		cnt1.push_back(1);//第一层节点数是1
+		while (!q.empty()) {
+			TreeNode *curr = q.front();
+			q.pop();
+			cout &lt;&lt; curr-&gt;val;
+			for (int i = 0; i &lt; cnt1.size(); i++) {//输出一个节点，当前层总结点数减一
+				if (cnt1.at(i) != 0) {
+					if (--cnt1.at(i) == 0)
+						cout &lt;&lt; &quot;  |  &quot;;//一个节点的所有子节点输出完，打印分隔符
+					break;
+				}
+			}
+			int childNum = (int)(curr-&gt;left != NULL) + (int)(curr-&gt;right != NULL);
+			cnt2.push_back(childNum);//增添当前节点的子节点数
+			if (sum(cnt1) == 0) {//这一层总节点数==0 换行 到下一层
+				cnt1 = cnt2;
+				cnt2.clear();
+				cout &lt;&lt; endl;				
+			}
+			if (curr-&gt;left) q.push(curr-&gt;left);
+			if (curr-&gt;right) q.push(curr-&gt;right);
+
+		}	
+	}
+};
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br><span class="line-number">111</span><br><span class="line-number">112</span><br><span class="line-number">113</span><br><span class="line-number">114</span><br><span class="line-number">115</span><br><span class="line-number">116</span><br><span class="line-number">117</span><br><span class="line-number">118</span><br><span class="line-number">119</span><br><span class="line-number">120</span><br><span class="line-number">121</span><br><span class="line-number">122</span><br><span class="line-number">123</span><br><span class="line-number">124</span><br><span class="line-number">125</span><br><span class="line-number">126</span><br><span class="line-number">127</span><br><span class="line-number">128</span><br><span class="line-number">129</span><br><span class="line-number">130</span><br><span class="line-number">131</span><br><span class="line-number">132</span><br><span class="line-number">133</span><br><span class="line-number">134</span><br><span class="line-number">135</span><br><span class="line-number">136</span><br><span class="line-number">137</span><br><span class="line-number">138</span><br><span class="line-number">139</span><br><span class="line-number">140</span><br><span class="line-number">141</span><br><span class="line-number">142</span><br><span class="line-number">143</span><br><span class="line-number">144</span><br><span class="line-number">145</span><br><span class="line-number">146</span><br><span class="line-number">147</span><br><span class="line-number">148</span><br><span class="line-number">149</span><br><span class="line-number">150</span><br><span class="line-number">151</span><br><span class="line-number">152</span><br><span class="line-number">153</span><br><span class="line-number">154</span><br><span class="line-number">155</span><br><span class="line-number">156</span><br><span class="line-number">157</span><br><span class="line-number">158</span><br><span class="line-number">159</span><br><span class="line-number">160</span><br><span class="line-number">161</span><br><span class="line-number">162</span><br><span class="line-number">163</span><br><span class="line-number">164</span><br><span class="line-number">165</span><br><span class="line-number">166</span><br><span class="line-number">167</span><br><span class="line-number">168</span><br><span class="line-number">169</span><br><span class="line-number">170</span><br><span class="line-number">171</span><br><span class="line-number">172</span><br><span class="line-number">173</span><br><span class="line-number">174</span><br><span class="line-number">175</span><br><span class="line-number">176</span><br><span class="line-number">177</span><br><span class="line-number">178</span><br><span class="line-number">179</span><br><span class="line-number">180</span><br><span class="line-number">181</span><br><span class="line-number">182</span><br><span class="line-number">183</span><br><span class="line-number">184</span><br><span class="line-number">185</span><br><span class="line-number">186</span><br><span class="line-number">187</span><br><span class="line-number">188</span><br><span class="line-number">189</span><br><span class="line-number">190</span><br><span class="line-number">191</span><br><span class="line-number">192</span><br><span class="line-number">193</span><br><span class="line-number">194</span><br><span class="line-number">195</span><br><span class="line-number">196</span><br><span class="line-number">197</span><br><span class="line-number">198</span><br><span class="line-number">199</span><br><span class="line-number">200</span><br><span class="line-number">201</span><br><span class="line-number">202</span><br><span class="line-number">203</span><br></div></div><h3 id="测试"><a href="#测试" class="header-anchor">#</a> 测试</h3> <div class="language-c++ line-numbers-mode"><pre class="language-text"><code>int main(void) {
+	string data = &quot;0,1,2,3,#,#,4,#,5,#,6,&quot;;
+	/*
+			 0
+		1          2
+	  3   #      #   4
+     # 5            # 6
+	*/
+	BinaryTree&lt;int&gt; tree(data);
+
+	cout &lt;&lt; &quot;先序 迭代：&quot;; tree.preOrderDFS1();//0135246
+	cout &lt;&lt; endl;
+	cout &lt;&lt; &quot;先序 递归：&quot;; tree.preOrderDFS2();//0135246
+	cout &lt;&lt; endl;
+
+	cout &lt;&lt; &quot;中序 迭代：&quot;; tree.inOrderDFS1();//3510246
+	cout &lt;&lt; endl;
+	cout &lt;&lt; &quot;中序 递归：&quot;; tree.inOrderDFS2();//3510246
+	cout &lt;&lt; endl;
+
+	cout &lt;&lt; &quot;后序 迭代：&quot;; tree.postOrderDFS1();//5316420
+	cout &lt;&lt; endl;
+	cout &lt;&lt; &quot;后序 递归：&quot;; tree.postOrderDFS2();//5316420
+	cout &lt;&lt; endl;
+
+	cout &lt;&lt; &quot;广度优先 迭代：&quot;; tree.BFS();//0123456
+	cout &lt;&lt; endl;
+	return 0;
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br></div></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/docs/Algorithm/Sort.html" class="prev">
+        排序
+      </a></span> <span class="next"><a href="/docs/DataStruct/SingleList.html">
+        单链表插入删除
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/docs/assets/js/app.01c57ae1.js" defer></script><script src="/docs/assets/js/2.6ead0304.js" defer></script><script src="/docs/assets/js/13.852a65b6.js" defer></script>
+  </body>
+</html>
